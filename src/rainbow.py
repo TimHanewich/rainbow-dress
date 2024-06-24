@@ -114,14 +114,6 @@ class Strand:
                     else: # we are on the way down
                         twinkle.strength = max(twinkle.strength - self.strength_jump, 0.0)
 
-            # strip out any twinkles that have ended (strenght at 0.0 and direction of False, down)
-            CompletedTwinkles:list[LEDTwinkle] = []
-            for twinkle in self.twinkles:
-                if twinkle.direction == False and twinkle.strength == 0.0:
-                    CompletedTwinkles.append(twinkle)
-            for twinkle in CompletedTwinkles:
-                self.twinkles.remove(twinkle)
-            
             # add new twinkle?
             if random.random() <= self.new_twinkle_chance: # chance struck! 
 
@@ -160,6 +152,16 @@ class Strand:
                 pi.index = twinkle.index
                 pi.color = brighten(twinkle.color, twinkle.strength)
                 ToReturn.append(pi)
+
+            # Now that we have translated them into pixel instructions that will be returned, now we can strip out any completed twinkles
+            # it is important to do this AFTER the pixel instructions have been made. Because if you strip them out before making the Pixel Instructions, the instruction to turn that partcular LED off (0, 0, 0) will not be realized.
+            # strip out any twinkles that have ended (strenght at 0.0 and direction of False, down)
+            CompletedTwinkles:list[LEDTwinkle] = []
+            for twinkle in self.twinkles:
+                if twinkle.direction == False and twinkle.strength == 0.0:
+                    CompletedTwinkles.append(twinkle)
+            for twinkle in CompletedTwinkles:
+                self.twinkles.remove(twinkle)
             
             return ToReturn
 
