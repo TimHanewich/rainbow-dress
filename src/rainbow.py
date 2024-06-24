@@ -265,6 +265,9 @@ class Strand:
                 ToReturn.append(PixelInstruction(this_index, this_color)) # add
                 at_strength = at_strength - strength_step # decrease strength step
 
+            # increment the index we are on!
+            self.on = next_index
+
             return ToReturn
 
 
@@ -329,3 +332,10 @@ if sys.platform == "rp2": # if on Raspberry Pi Pico
                 pair[1].show()
 
                 
+
+s = Strand(10, MODE_BULDGE)
+while True:
+    input("-------------")
+    pis = s.next()
+    for pi in pis:
+        print(str(pi))
