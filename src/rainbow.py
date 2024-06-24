@@ -1,6 +1,7 @@
 import color_toolkit
 import sys
 import random
+import math
 
 def brighten(color:tuple[int, int, int], strength:float = 1.0) -> tuple[int, int, int]:
 
@@ -45,6 +46,7 @@ class LEDTwinkle:
 MODE_RUN:int = 0
 MODE_TWINKLE:int = 1
 MODE_TRAIL:int = 2
+MODE_BULDGE:int = 3
 class Strand:
 
     """Coordinates the pixel patterns on a single WS2812B strand."""
@@ -75,7 +77,8 @@ class Strand:
         # MODE_TRAIL
         self.trail_length:int = 4 # how many LED's will 'trail' behind the lead 
 
-
+        # MODE_BULDGE settings
+        self.buldge_size:int = 5 # how many LED's are in total lit up in a particular buldge
 
 
     def next(self) -> list[PixelInstruction]:
@@ -213,6 +216,58 @@ class Strand:
 
             return ToReturn
         
+        elif self.mode == MODE_BULDGE:
+
+            # determine which index is next
+            next_index:int = None
+            if self.on == None: # not on anything! It is brand new!
+                next_index = 0
+            else:
+                next_index = self._increment(self.on)
+
+            # how many around it do we need?
+            count_around_center:int = self.buldge_size - 1 # -1 for the center. That is the # around it!
+            count_before:int = int(math.ceil(count_around_center / 2)) # half, rounding up
+            count_after:int = count_around_center - count_before # the remainder
+
+            # assemble a list
+            ToReturn:list[PixelInstruction] = []
+
+            # handle one that should be turned off now
+            if self.on != None:
+                to_turn_off_index:int = self._decrement_by(self.on, count_before)
+                ToReturn.append(PixelInstruction(to_turn_off_index, (0, 0, 0)))
+            
+            # handle center
+            ToReturn.append(PixelInstruction(next_index, self.palette[next_index]))
+
+            # variables for handling the ones before and after
+            min_strength:float = 0.02
+            max_strength:float = 0.20
+            max_distance_from_center:int = int(max(count_before, count_after))
+            strength_step:float = (max_strength - min_strength) / max_distance_from_center
+
+            # handle the ones before
+            at_strength:float = max_strength
+            for x in range(0, count_before):
+                this_index:int = self._decrement_by(next_index, x + 1) # get the index
+                this_color:tuple[int, int, int] = self.palette[this_index] # select the appropriate color for this pixel
+                this_color = brighten(this_color, at_strength) # dim
+                ToReturn.append(PixelInstruction(this_index, this_color)) # add
+                at_strength = at_strength - strength_step # decrease strength step
+
+            # handle the ones after
+            at_strength:float = max_strength
+            for x in range(0, count_after):
+                this_index:int = self._increment_by(next_index, x + 1) # get the index
+                this_color:tuple[int, int, int] = self.palette[this_index] # select the appropriate color for this pixel
+                this_color = brighten(this_color, at_strength) # dim
+                ToReturn.append(PixelInstruction(this_index, this_color)) # add
+                at_strength = at_strength - strength_step # decrease strength step
+
+            return ToReturn
+
+
         else:
             raise Exception("Mode '" + str(self.mode) + "' not a valid mode.")
         
@@ -224,6 +279,12 @@ class Strand:
             return 0
         else:
             return _from + 1
+        
+    def _increment_by(self, _from:int, steps:int) -> int:
+        ToReturn:int = _from
+        for _ in range(steps):
+            ToReturn = self._increment(ToReturn)
+        return ToReturn
     
     def _decrement(self, _from:int) -> int:
         """Decrements index downward, given the length of the strand (will revert back to the top if needed). Just a mathematical helper."""
