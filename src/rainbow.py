@@ -44,6 +44,7 @@ class LEDTwinkle:
 # Strand modes and Strand class
 MODE_RUN:int = 0
 MODE_TWINKLE:int = 1
+MODE_RUN_TRAIL:int = 2
 class Strand:
 
     """Coordinates the pixel patterns on a single WS2812B strand."""
@@ -70,6 +71,11 @@ class Strand:
         self.new_twinkle_chance:float = 0.1 # likelihood a new twinkle will start someone on the strip in any given frame.
         self.twinkles:list[LEDTwinkle] = []
         self.strength_jump:float = 0.1 # the percent to move up/down in strength with each passing frame.
+
+        # MODE_RUN_TRAIL
+        self.trail_length:int = 2 # how many LED's will 'trail' behind the lead 
+
+
 
 
     def next(self) -> list[PixelInstruction]:
@@ -100,6 +106,7 @@ class Strand:
 
             # return
             return ToReturn
+        
         elif self.mode == MODE_TWINKLE:
 
             # first continue the current twinkles
@@ -165,8 +172,69 @@ class Strand:
             
             return ToReturn
 
+        elif self.mode == MODE_RUN_TRAIL:
+
+            # determine which index is next
+            next_index:int = None
+            if self.on == None: # not on anything! It is brand new!
+                next_index = 0
+            else:
+                next_index = self._increment(self.on)
+
+            # collect a list of trailing indexes, in order from closest to furthest away from the leading index selected above.
+            trail:list[int] = []
+            for x in range(self.trail_length):
+                trail.append(self._decrement_by(next_index, x + 1))
+            
+            # turn these into a list of pixel commands
+            ToReturn:list[PixelInstruction] = []
+
+            # first pixel command - turn off the very last one from the end of the trail in the last frame
+            to_turn_off_index:int = self._decrement_by(self.on, self.trail_length) # select last one
+            ToReturn.append(PixelInstruction(to_turn_off_index, (0, 0, 0)))
+
+            # next ones, the trail. 
+            percent_step:float = 1.0 / (self.trail_length + 1)
+            at_strength:float = percent_step
+            for index in range(trail):
+                this_color:tuple[int, int, int] = self.palette[index]
+                this_color = brighten(this_color, at_strength) # dim it, so it is a trail
+                ToReturn.append(PixelInstruction(index, this_color)) # add it
+                at_strength = at_strength + percent_step # increment strength so the next in the trail is higher
+            
+            # now, lets do the leading pixel (the "on")
+            ToReturn.append(PixelInstruction(next_index, self.palette[next_index]))
+
+            # before returning, increment "on" (save state)
+            self.on = next_index
+
+            return ToReturn
+        
         else:
             raise Exception("Mode '" + str(self.mode) + "' not a valid mode.")
+        
+
+    def _increment(self, _from:int) -> int:
+        """Increments index upward, given the length of the strand (will revert back to 0 if over length). Just a mathematical helper."""
+
+        if _from == (len(self.palette) - 1): # if we are on the last one
+            return 0
+        else:
+            return _from + 1
+    
+    def _decrement(self, _from:int) -> int:
+        """Decrements index downward, given the length of the strand (will revert back to the top if needed). Just a mathematical helper."""
+
+        if _from == 0:
+            return len(self.palette) - 1
+        else:
+            return _from - 1
+        
+    def _decrement_by(self, _from:int, steps:int) -> int:
+        ToReturn:int = _from
+        for _ in range(steps):
+            ToReturn = self._decrement(ToReturn)
+        return ToReturn
 
 
 ## platform dependent!
