@@ -76,8 +76,8 @@ class Strand:
 
         # MODE_TRAIL settings
         self.trail_length:int = 4 # how many LED's will 'trail' behind the lead 
-        self.trail_max_strength:float = 0.1 # used in MODE_BULDGE too
-        self.trail_min_strength:float = 0.01 # used in MODE_BULDGE too
+        self.trail_max_strength:float = 0.1 # used in MODE_BULDGE too. Defines the max brightness for a pixel that is "supporting" the center/lead pixel.
+        self.trail_min_strength:float = 0.01 # used in MODE_BULDGE too. Defines the min brightness for a pixel that is "supporting" the center/lead pixel.
 
         # MODE_BULDGE settings
         self.buldge_size:int = 5 # how many LED's are in total lit up in a particular buldge
