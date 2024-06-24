@@ -190,17 +190,18 @@ class Strand:
             ToReturn:list[PixelInstruction] = []
 
             # first pixel command - turn off the very last one from the end of the trail in the last frame
-            to_turn_off_index:int = self._decrement_by(self.on, self.trail_length) # select last one
-            ToReturn.append(PixelInstruction(to_turn_off_index, (0, 0, 0)))
+            if self.on != None: # if there is something on right now! (there may not be if this is brand new)
+                to_turn_off_index:int = self._decrement_by(self.on, self.trail_length) # select last one
+                ToReturn.append(PixelInstruction(to_turn_off_index, (0, 0, 0)))
 
             # next ones, the trail. 
             percent_step:float = 1.0 / (self.trail_length + 1)
-            at_strength:float = percent_step
-            for index in range(trail):
+            at_strength:float = 1.0 - percent_step
+            for index in trail:
                 this_color:tuple[int, int, int] = self.palette[index]
                 this_color = brighten(this_color, at_strength) # dim it, so it is a trail
                 ToReturn.append(PixelInstruction(index, this_color)) # add it
-                at_strength = at_strength + percent_step # increment strength so the next in the trail is higher
+                at_strength = at_strength - percent_step # increment strength so the next in the trail is higher
             
             # now, lets do the leading pixel (the "on")
             ToReturn.append(PixelInstruction(next_index, self.palette[next_index]))
