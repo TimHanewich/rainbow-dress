@@ -15,7 +15,7 @@ def test() -> None:
     # add strand 2
     s2 = Strand(12, MODE_TWINKLE)
     s2.new_twinkle_chance = 0.1
-    re.add((s2, neopixel.Neopixel(12, 1, 19, "GRB")))
+    re.add((s2, neopixel.Neopixel(12, 1, 19, "GRB"))) # has to use a different StateMachine than the first. 0-7. Can only do 8 unique strands.
 
     while True:
         re.next()
