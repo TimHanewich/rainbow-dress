@@ -330,12 +330,3 @@ if sys.platform == "rp2": # if on Raspberry Pi Pico
 
                 # show the changes on this strand
                 pair[1].show()
-
-                
-
-s = Strand(10, MODE_BULDGE)
-while True:
-    input("-------------")
-    pis = s.next()
-    for pi in pis:
-        print(str(pi))
