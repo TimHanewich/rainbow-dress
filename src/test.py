@@ -2,7 +2,7 @@ import neopixel
 import rainbow
 import time
 
-s = rainbow.Strand(12, rainbow.MODE_TRAIL)
+s = rainbow.Strand(12, rainbow.MODE_BULDGE)
 pixs = neopixel.Neopixel(12, 0, 22, "GRB")
 re = rainbow.RainbowEngine()
 re.add((s, pixs))

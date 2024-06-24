@@ -242,8 +242,8 @@ class Strand:
             ToReturn.append(PixelInstruction(next_index, self.palette[next_index]))
 
             # variables for handling the ones before and after
-            min_strength:float = 0.02
-            max_strength:float = 0.20
+            min_strength:float = 0.001
+            max_strength:float = 0.05
             max_distance_from_center:int = int(max(count_before, count_after))
             strength_step:float = (max_strength - min_strength) / max_distance_from_center
 
