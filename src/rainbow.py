@@ -73,7 +73,7 @@ class Strand:
         self.strength_jump:float = 0.1 # the percent to move up/down in strength with each passing frame.
 
         # MODE_RUN_TRAIL
-        self.trail_length:int = 2 # how many LED's will 'trail' behind the lead 
+        self.trail_length:int = 4 # how many LED's will 'trail' behind the lead 
 
 
 
