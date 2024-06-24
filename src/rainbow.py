@@ -195,13 +195,3 @@ if sys.platform == "rp2": # if on Raspberry Pi Pico
                 pair[1].show()
 
                 
-
-    
-
-s = Strand(5, MODE_TWINKLE)
-while True:
-    print("---------")
-    pis = s.next()
-    for pi in pis:
-        print(str(pi))
-    input()
