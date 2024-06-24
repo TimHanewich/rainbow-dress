@@ -20,3 +20,5 @@ def test() -> None:
     while True:
         re.next()
         time.sleep(0.1)
+
+test()
