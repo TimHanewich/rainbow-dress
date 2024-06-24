@@ -44,7 +44,7 @@ class LEDTwinkle:
 # Strand modes and Strand class
 MODE_RUN:int = 0
 MODE_TWINKLE:int = 1
-MODE_RUN_TRAIL:int = 2
+MODE_TRAIL:int = 2
 class Strand:
 
     """Coordinates the pixel patterns on a single WS2812B strand."""
@@ -72,7 +72,7 @@ class Strand:
         self.twinkles:list[LEDTwinkle] = []
         self.strength_jump:float = 0.1 # the percent to move up/down in strength with each passing frame.
 
-        # MODE_RUN_TRAIL
+        # MODE_TRAIL
         self.trail_length:int = 4 # how many LED's will 'trail' behind the lead 
 
 
@@ -172,7 +172,7 @@ class Strand:
             
             return ToReturn
 
-        elif self.mode == MODE_RUN_TRAIL:
+        elif self.mode == MODE_TRAIL:
 
             # determine which index is next
             next_index:int = None
