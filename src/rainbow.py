@@ -195,8 +195,10 @@ class Strand:
                 ToReturn.append(PixelInstruction(to_turn_off_index, (0, 0, 0)))
 
             # next ones, the trail. 
-            percent_step:float = 1.0 / (self.trail_length + 1)
-            at_strength:float = 1.0 - percent_step
+            max_strength:float = 0.8 # max strength of the trail
+            min_strength:float = 0.1 # min strength of the trail
+            percent_step:float = (max_strength - min_strength) / self.trail_length
+            at_strength:float = max_strength
             for index in trail:
                 this_color:tuple[int, int, int] = self.palette[index]
                 this_color = brighten(this_color, at_strength) # dim it, so it is a trail
