@@ -74,8 +74,10 @@ class Strand:
         self.twinkles:list[LEDTwinkle] = []
         self.strength_jump:float = 0.1 # the percent to move up/down in strength with each passing frame.
 
-        # MODE_TRAIL
+        # MODE_TRAIL settings
         self.trail_length:int = 4 # how many LED's will 'trail' behind the lead 
+        self.trail_max_strength:float = 0.1 # used in MODE_BULDGE too
+        self.trail_min_strength:float = 0.01 # used in MODE_BULDGE too
 
         # MODE_BULDGE settings
         self.buldge_size:int = 5 # how many LED's are in total lit up in a particular buldge
@@ -198,8 +200,8 @@ class Strand:
                 ToReturn.append(PixelInstruction(to_turn_off_index, (0, 0, 0)))
 
             # next ones, the trail. 
-            max_strength:float = 0.1 # max strength of the trail
-            min_strength:float = 0.01 # min strength of the trail
+            max_strength:float = self.trail_max_strength # max strength of the trail
+            min_strength:float = self.trail_min_strength # min strength of the trail
             percent_step:float = (max_strength - min_strength) / self.trail_length
             at_strength:float = max_strength
             for index in trail:
@@ -242,8 +244,8 @@ class Strand:
             ToReturn.append(PixelInstruction(next_index, self.palette[next_index]))
 
             # variables for handling the ones before and after
-            min_strength:float = 0.001
-            max_strength:float = 0.05
+            min_strength:float = self.trail_min_strength
+            max_strength:float = self.trail_max_strength
             max_distance_from_center:int = int(max(count_before, count_after))
             strength_step:float = (max_strength - min_strength) / max_distance_from_center
 
