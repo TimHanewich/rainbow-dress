@@ -1,7 +1,12 @@
+from rainbow import *
+import machine
 import neopixel
 
-# init and clear
-pixels = neopixel.Neopixel(5, 0, 22, "GRB")
-pixels.fill((0, 0, 0))
-pixels.show()
+def test() -> None:
 
+    re = RainbowEngine()
+    re.add((Strand(5, 0.1), neopixel.Neopixel(5, 0, 22, "GRB")))
+
+    while True:
+        re.next()
+        input("Did it!")
