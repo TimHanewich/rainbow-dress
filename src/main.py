@@ -5,6 +5,7 @@ import time
 import ssd1306
 import voltage
 import BatteryMonitor
+import WeightedAverageCalculator
 
 # set up SSD1306
 i2c = machine.I2C(1, sda=machine.Pin(14), scl=machine.Pin(15))
@@ -15,6 +16,9 @@ vs = voltage.VoltageSensor(26) # GPIO 26
 
 # set up battery monitor to convert the voltage we read to state of charge %'s
 bm = BatteryMonitor.BatteryMonitor()
+
+# set up weighted avg calculator
+wac = WeightedAverageCalculator.WeightedAverageCalculator(alpha=0.9)
 
 def test() -> None:
 
@@ -38,7 +42,8 @@ def test() -> None:
         re.next() # show next pattern
 
         # read voltage
-        volts:float = vs.voltage()
+        volts:float = vs.voltage() # raw
+        volts = wac.feed(volts) # pass through averaging filter
 
         # calculate SOC
         soc:float = bm.soc(volts)
