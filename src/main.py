@@ -45,7 +45,7 @@ def test() -> None:
         socs:str = str(round(soc * 100, 1)) + "%"
         
         # what to print on SSD-1306
-        if (time.ticks_ms - display_last_updated_ticks_ms) > (update_display_every_seconds * 1000):
+        if (time.ticks_ms() - display_last_updated_ticks_ms) > (update_display_every_seconds * 1000):
             oled.fill(0)
             oled.text(str(round(volts, 2)) + "v", 0, 0)
             oled.text("SOC: " + socs, 0, 12)
@@ -53,6 +53,6 @@ def test() -> None:
             display_last_updated_ticks_ms = time.ticks_ms()
 
         # sleep
-        time.sleep(0.25)
+        time.sleep(0.1)
 
 test()

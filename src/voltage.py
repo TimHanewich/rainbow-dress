@@ -8,8 +8,8 @@ class VoltageSensor:
     def _sample_analog(self) -> int:
         """Takes average of analog reading over short period of time."""
         # I've learned that, no matter what duration you take samples over, the min, mean, and max should be the same. So taking these samples rapidly over 1.5 seconds is fine.
-        duration:float = 1.5
-        samples:int = 30
+        duration:float = 0.05
+        samples:int = 10
         delay:float = duration / samples
         total:int = 0
         for x in range(samples):
