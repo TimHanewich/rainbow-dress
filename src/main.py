@@ -42,7 +42,7 @@ def test() -> None:
         re.next() # show next pattern
 
         # read voltage
-        volts:float = vs.voltage() # raw
+        volts:float = vs.voltage(duration=0.05, samples=10) # raw
         volts = wac.feed(volts) # pass through averaging filter
 
         # calculate SOC
