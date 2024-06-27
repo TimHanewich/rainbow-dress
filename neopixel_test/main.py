@@ -10,10 +10,13 @@ def fill_and_wait(color:tuple[int, int, int]) -> None:
 
 # inf loop
 while True:
-    fill_and_wait((255, 255, 255)) # all white, full brightness (max consumption)
-    fill_and_wait((255, 0, 0)) # red
-    fill_and_wait((0, 255, 0)) # green
-    fill_and_wait((0, 0, 255)) # blue
-    fill_and_wait((128, 128, 128)) # all filled, half brightness
+    fill_and_wait((1, 1, 1)) # all white, min brightness
+    fill_and_wait((1, 0, 0)) # red
+    fill_and_wait((0, 1, 0)) # green
+    fill_and_wait((0, 0, 1)) # blue
+    fill_and_wait((10, 10, 10)) # all white, 10
+    fill_and_wait((10, 10, 0)) # 10
+    fill_and_wait((0, 10, 10)) # 10
+    fill_and_wait((10, 0, 10)) # 10
     fill_and_wait((0, 0, 0)) # off
     
