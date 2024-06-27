@@ -2,8 +2,32 @@
 - Confirmed to work
     - 22
     - 19
+    - 21
+    - 20
+    - 19
+    - 18
+    - 17
+    - 16
+    - 0
+    - 1
+    - 2
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 27
+    - 28
 - Cannot get to work for whatever reason.
     - 3
+    - 26
 
 ## Learning Resources
 - [This article](https://www.raspberrypi.com/news/how-to-power-loads-of-leds-with-a-single-raspberry-pi-pico/) describes the purpose of the StateMachine pretty well and why there is only a maximum of 8 neopixel strands it can support.
