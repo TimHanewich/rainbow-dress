@@ -94,6 +94,6 @@ However, keep in mind that not all pixels will be on at the same time. Will like
 ## Measuring Capacity of my 18650 Batteries
 I have a handful of unprotected 18650 batteries that I salvaged out of an old drill battery pack.
 
-I charged one up to fully charged, according to my balance charger (4.1V) and used the balance charger to fully discharge down to __V.
+I charged one up to fully charged, according to my balance charger (4.1V) and used the balance charger to fully discharge down to 3.1V, fully discharged according to my balance charger. I discharged at a rate of 0.8 amps.
 
-The amperage extracted from the battery during full discharge totalled ____.
+The amperage extracted from the battery after ~82 minutes after fully discharging totalled 1109mAh, or 1.11 Ah.
