@@ -73,7 +73,7 @@ From waist to ground is about 38 inches.
 
 We want 8 full strands from waist to ground. So, 38*8 = 304 inches of neopixels.
 
-The [strands I am using](https://a.co/d/03c6hYHa) are 150 LEDs per 16.4 ft, or 196 inches. Or a density of 0.765 pixels for inch (another way of saying 1.31 inches in between each pixel, just flipped).
+The [strands I am using](https://a.co/d/03c6hYHa) are 150 LEDs per 16.4 ft, or 196 inches. Or a density of 0.765 pixels per inch (another way of saying 1.31 inches in between each pixel, just flipped).
 
 So, for 304 inches, at 0.765 pixels per inch, that would be approximately 232 pixels.
 
