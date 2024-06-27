@@ -90,3 +90,10 @@ Estimated current consumption @ 5V:
 The good news, at only 0.15 amps idling, the system could certainly turn on. But the other values are exceptionally high. Don't think my two 18650 batteries in a series can support such a high discharge rate. And if they could, likely not for long.
 
 However, keep in mind that not all pixels will be on at the same time. Will likely adopting a pattern in which they twinkle, "fall", etc.
+
+## Measuring Capacity of my 18650 Batteries
+I have a handful of unprotected 18650 batteries that I salvaged out of an old drill battery pack.
+
+I charged one up to fully charged, according to my balance charger (4.1V) and used the balance charger to fully discharge down to __V.
+
+The amperage extracted from the battery during full discharge totalled ____.
