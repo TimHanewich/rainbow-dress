@@ -1,33 +1,7 @@
 ## Trying GPIO's with Neopixels
-- Confirmed to work
-    - 22
-    - 19
-    - 21
-    - 20
-    - 19
-    - 18
-    - 17
-    - 16
-    - 0
-    - 1
-    - 2
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    - 9
-    - 10
-    - 11
-    - 12
-    - 13
-    - 14
-    - 15
-    - 27
-    - 28
-- Cannot get to work for whatever reason.
-    - 3
-    - 26
+On a Raspberry Pi Pico, I tested and was able to get Neopixel control of the WS2812b strand with almost every GPIO pin (tested and confirmed functionality on GP 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 27, 28).
+
+However, for whatever reason, I was not able to confirm functionality on GP 3 and 26. I don't know if this is specific to the board I was working on (maybe I didn't solder the pin correctly and there is a short), but worth noting.
 
 ## Learning Resources
 - [This article](https://www.raspberrypi.com/news/how-to-power-loads-of-leds-with-a-single-raspberry-pi-pico/) describes the purpose of the StateMachine pretty well and why there is only a maximum of 8 neopixel strands it can support.
