@@ -59,3 +59,26 @@ Columns in the above table explained:
 - **Amps Per Pixel** - the amps from the **W/O Pi** column, divided by 12 (the number of pixels), to get a per-pixel amount.
 
 In the above table, you may wonder why measuring the color (0, 0, 0), no color at all, is important. That is because these neopixels have an *idle current draw*. Even while not showing a color, they still consume a small amount of power, on a per-pixel basis.
+
+## Estimating Current Consumption
+From waist to ground is about 38 inches.
+
+We want 8 full strands from waist to ground. So, 38*8 = 304 inches of neopixels.
+
+The [strands I am using](https://a.co/d/03c6hYHa) are 150 LEDs per 16.4 ft, or 196 inches. Or a density of 0.765 pixels for inch (another way of saying 1.31 inches in between each pixel, just flipped).
+
+So, for 304 inches, at 0.765 pixels per inch, that would be approximately 232 pixels.
+
+Estimated current consumption @ 5V:
+|Color|Total Amps (neopixel only)|
+|-|-|
+|255,255,255|8.8|
+|255,0,0|3.04|
+|0,255,0|3.04|
+|0,0,255|3.02|
+|128,128,128|4.52|
+|0,0,0|0.15|
+
+The good news, at only 0.15 amps idling, the system could certainly turn on. But the other values are exceptionally high. Don't think my two 18650 batteries in a series can support such a high discharge rate. And if they could, likely not for long.
+
+However, keep in mind that not all pixels will be on at the same time. Will likely adopting a pattern in which they twinkle, "fall", etc.
