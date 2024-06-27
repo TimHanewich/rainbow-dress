@@ -97,3 +97,5 @@ I have a handful of unprotected 18650 batteries that I salvaged out of an old dr
 I charged one up to fully charged, according to my balance charger (4.1V) and used the balance charger to fully discharge down to 3.1V, fully discharged according to my balance charger. I discharged at a rate of 0.8 amps.
 
 The amperage extracted from the battery after ~82 minutes after fully discharging totalled 1109mAh, or 1.11 Ah.
+
+But, charging it back up to 4.1V only reads that it put back 985 mAh. Weird.
