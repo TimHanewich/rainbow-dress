@@ -35,7 +35,7 @@ Since we know the voltage divider brought the voltage down to 32%, we can just d
 2.36 / 0.32 = 7.37 volts is the battery pack's voltage.
 ```
 
-## Estimating Current Consumption of Neopixels
+## Estimating Per-Pixel Current Consumption of Neopixels
 All measurements were @ 5V supply.
 
 You can find the basic code for the tests performed on commit `cd926f0c2a4c9aeb86223bccf5b2833f5d3a747b` of this repo in this `neopixel_test` folder.
@@ -68,7 +68,7 @@ Columns in the above table explained:
 
 In the above table, you may wonder why measuring the color (0, 0, 0), no color at all, is important. That is because these neopixels have an *idle current draw*. Even while not showing a color, they still consume a small amount of power, on a per-pixel basis.
 
-## Estimating Current Consumption
+## Estimating Total Current Consumption
 From waist to ground is about 38 inches.
 
 We want 8 full strands from waist to ground. So, 38*8 = 304 inches of neopixels.
