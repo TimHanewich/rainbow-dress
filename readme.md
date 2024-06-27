@@ -57,8 +57,8 @@ With a single strand of 12 WS2812b Neopixels hooked up, going through several co
 |10,10,10|0.048|0.026|0.002|
 |10,10,0|0.041|0.019|0.002|
 |0,10,10|0.041|0.019|0.002|
-|10,0,10|0.041|0.008|< 0.001|
-|0,0,0|0.03|0.008|0.001|
+|10,0,10|0.041|0.008|0.002|
+|0,0,0|0.03|0.008|< 0.001|
 
 Columns in the above table explained:
 - **Color** - the RGB color that was shown on all 12 pixels.
