@@ -9,9 +9,11 @@ However, for whatever reason, I was not able to confirm functionality on GP 3 an
 ## Voltage Dividing
 This project uses a voltage divider to proportionally scale down the voltage of the full battery pack to a window that can be read by the Raspberry Pi Pico's ADC pins (below 3.3v).
 
-It is 32%
+![voltage divider](https://i.imgur.com/WzduiHU.png)
 
-|Situation|Battery Pack Voltage|Divided Voltage|ADC Reading|
+As you can see in the image above, a voltage divider with a 100,000 ohm resistor on the positive terminal and a 47,000 ohm resistor on the negative terminal will cut the source voltage to only 32% of its original state. This **32%** is very important for proportionally calculating what the battery pack's voltage is, based upon the 32% the pico will be reading on its ADC pins (read on below).
+
+|Situation|Battery Pack Voltage|Divided Voltage (32%)|ADC Reading|
 |-|-|-|-|
 |Two fully charged 18650s in series|8.4|2.69|54700|
 |Two fully depleted 18650s in series|6.0|1.92|39150|
