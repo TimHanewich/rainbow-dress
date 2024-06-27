@@ -35,4 +35,25 @@ Since we know the voltage divider brought the voltage down to 32%, we can just d
 2.36 / 0.32 = 7.37 volts is the battery pack's voltage.
 ```
 
+## Estimating Current Consumption of Neopixels
+All measurements were @ 5V supply.
 
+- Current Consumption of Raspberry Pi Pico on its own: 0.022 amps
+
+With a single strand of 12 WS2812b Neopixels hooked up, going through several color patterns:
+|Color|Amps (including Pi)|W/O Pi|Amps Per Pixel|
+|-|-|-|-|
+|255,255,255|0.477|0.455|0.038|
+|255,0,0|0.179|0.157|0.013|
+|0,255,0|0.179|0.157|0.013|
+|0,0,255|0.178|0.156|0.013|
+|128,128,128|0.256|0.234|0.02|
+|0,0,0|0.03|0.008|0.001|
+
+Columns in the above table explained:
+- **Color** - the RGB color that was shown on all 12 pixels.
+- **Amps (including Pi)** - the total amps reading from the DC power supply (powering both the Pi Pico and Neopixels, nothing more)
+- **W/O Pi** - The total amps, minus the known value that the Pi consumes, 0.022 amps (@ 5V)
+- **Amps Per Pixel** - the amps from the **W/O Pi** column, divided by 12 (the number of pixels), to get a per-pixel amount.
+
+In the above table, you may wonder why measuring the color (0, 0, 0), no color at all, is important. That is because these neopixels have an *idle current draw*. Even while not showing a color, they still consume a small amount of power, on a per-pixel basis.
