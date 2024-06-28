@@ -1,12 +1,19 @@
 import machine
 import ssd1306
 import time
+import neopixel
 
-# set up
+# set up ADC
 adc = machine.ADC(machine.Pin(26, machine.Pin.IN))
+
+# set up OLED
 i2c = machine.I2C(1, sda=machine.Pin(14), scl=machine.Pin(15))
 print(i2c.scan())
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+# set up neopixel
+pixels1 = neopixel.Neopixel(5, 0, 22, "GRB") # 5 pixel strand on GP22
+pixels2 = neopixel.Neopixel(11, 1, 19, "GRB") # 11 pixel strand on GP19
 
 def burst_sample(duration:float = 1.0, samples:int = 100) -> int:
     """Takes average of analog reading over short period of time."""
@@ -18,6 +25,12 @@ def burst_sample(duration:float = 1.0, samples:int = 100) -> int:
     return int(round(total / samples, 0))
 
 while True:
+
+    # turn on the pixels (we put this in the while loop because I may be taking them attaching them on and off to experiemtn with voltage, so keep showing!)
+    pixels1.fill((255, 255, 255))
+    pixels2.fill((255, 255, 255))
+    pixels1.show()
+    pixels2.show()
     
     # sample
     val:int = burst_sample()
