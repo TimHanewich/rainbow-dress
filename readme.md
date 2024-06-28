@@ -115,3 +115,4 @@ But, charging it back up to 4.1V only reads that it put back 985 mAh. Weird.
 
 ## Tests I Created and Performed
 - [voltage](./tests/voltage/) on commit `534b1bc19a855027a01a37e4c7f81d3ae7e5f558` contains simple code that reads the incoming ADC and translates this to a voltage on the battery pack. Consistently lower voltage reading on the pack by 0.41 volts lower than actual. Need to adjust measurements?
+- [voltage](./tests/voltage/) on commit `8e1ac485fb3d0d026500dfda2ca8cdc88c92eb62` does the same as above, but also turns on two strands of neopixels at full brightness. This test is to observe any voltage sag when the battery is under load!
