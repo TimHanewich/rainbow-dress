@@ -68,6 +68,19 @@ Columns in the above table explained:
 
 In the above table, you may wonder why measuring the color (0, 0, 0), no color at all, is important. That is because these neopixels have an *idle current draw*. Even while not showing a color, they still consume a small amount of power, on a per-pixel basis.
 
+### Digitally Estimating Current Consumption While Powering Neopixels
+So I'm trying to determine if there is a way to digitally (within the Raspberry Pi Pico's calculations) estimate how much current all of the neopixels are consuming based upon what colors the Raspberry Pi is instructing them to be. Why would this be important? If we can calculate this, maybe we could back this out to determine the voltage sag and get a feel for what the real voltage is.
+
+![luminary values](https://i.imgur.com/wEEO8kz.png)
+
+In the example above, you'll see I did some math. For each of the colors in the table of consumption in the section above, I added up the R, G, and B values. The consumption for all three is roughly similar (only B seems to under-consume a bit), so we can add them together. I called this new unit "Luminary Values". 
+
+After adding these all up, I then summed up the *entirety* of every tests. And then did the same for the amps per pixel on each test. Then, I divided those two to get a rough estimate for how many amps each luminary value takes. The answer is ` 0.000047619047619` amps. I should probably express that in mA. But whatever.
+
+Knowing that, I can now estimate the amperage consumption of a single neopixel based upon the sum of the R,G,B value it is displaying. You can see these estimates in the "Estimated" blue column.
+
+In the "Off Actual" and the "Off as %", I am comparing that estimation against the actual reading in the "Single Pixel Amps" column (as a difference). You can see that in the higher-consumption scenarios, the accuracy is far better. This is due to a rounding error I believe. At such low current rates, my DC supply was not able to give me so many decimal points for a number so low, so it rounded up. Had I had more granularity during recording, the estimates would likely be more accurate at such low consumption. But, at least for high consumption, they seem to be at least moderately accurate.
+
 ## Voltage Sag?
 I performed tests of recording the voltage of the battery pack via the ADC channel in three configurations: no neopixels attached (the only thing consuming from the battery was the buck converter and Pi), a single strand of 5 neopixels attached, and then both strands of 5 neopixels and 11 neopixels attached (totaling 16 neopixels).
 
