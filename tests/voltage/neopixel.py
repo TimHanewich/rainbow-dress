@@ -198,3 +198,85 @@ class Neopixel:
         time.sleep(self.delay)
 
 
+## ADDITIONS TO BASE CODE BELOW!
+
+class PixelStatus:
+    def __init__(self, index:int = 0) -> None:
+        self.index:int = index
+
+        # actually displaying color
+        self.color:tuple[int, int, int] = (0, 0, 0) # default is all off
+
+        # next up color (set, but not shown)
+        self.color_set:tuple[int, int, int] = None
+    
+    @property
+    def luminary_value(self) -> int:
+        return self.color[0] + self.color[1] + self.color[2]
+    
+    @property
+    def current(self) -> float:
+        """Returns the current consumption estimate of this single pixel, in milliamps"""
+        return self.luminary_value * 0.0458513708513709 # this value is a constant, observed as the average current consumption, in milliamps, of a single LED pixel per "luminary value" point.
+
+    def __str__(self) -> str:
+        return str({"index": self.index, "color": self.color, "color_set": self.color_set})
+
+
+class NeopixelManager:
+    """Superstructure class around Neopixel, with the capability of estimating current consumption @ 5V."""
+
+    def __init__(self, pixels:Neopixel) -> None:
+        self._pixels:Neopixel = pixels
+
+        # turn off automatically at init
+        self._pixels.fill((0, 0, 0))
+        self._pixels.show()
+
+        # create empty pixel settings for the length of them
+        self._statuses:list[PixelStatus] = []
+        for i in range(self.num_leds):
+            self._statuses.append(PixelStatus(i))
+
+    @property
+    def num_leds(self) -> int:
+        return self._pixels.num_leds
+    
+    def set_pixel(self, pixel_index:int, color:tuple[int, int, int]) -> None:
+
+        # set the next color setting
+        pix_set:bool = False
+        for ps in self._statuses:
+            if ps.index == pixel_index:
+                ps.color_set = color
+                pix_set = True
+        if pix_set == False:
+            raise Exception("Pixel with index '" + str(pixel_index) + "' not found in Neopixel strand of length " + str(self.num_leds) + ".")
+    
+        # set it against the actualy pixels
+        self._pixels.set_pixel(pixel_index, color)
+
+    def fill(self, color:tuple[int, int, int]) -> None:
+        for i in range(self.num_leds):
+            self.set_pixel(i, color)
+
+    def show(self) -> None:
+
+        # shift all set to actual
+        for ps in self._statuses:
+            if ps.color_set != None:
+                ps.color = ps.color_set
+            ps.color_set = None
+        
+        # show!
+        self._pixels.show()
+    
+    @property
+    def current(self) -> float:
+        """Estimates current consumption, in milliamps, of total strand in this moment."""
+
+        ToReturn:float = 0.0
+        for ps in self._statuses:
+            ToReturn = ToReturn + ps.current
+        
+        return ToReturn
