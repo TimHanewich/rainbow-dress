@@ -12,8 +12,8 @@ print(i2c.scan())
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 # set up neopixel
-pixels1 = neopixel.Neopixel(1, 0, 22, "GRB") # 11 pixel strand on GP22
-pixels2 = neopixel.Neopixel(11, 1, 19, "GRB") # 11 pixel strand on GP19
+pixels1 = neopixel.NeopixelManager(neopixel.Neopixel(11, 0, 22, "GRB")) # 11 pixel strand on GP22
+pixels2 = neopixel.NeopixelManager(neopixel.Neopixel(11, 1, 19, "GRB")) # 11 pixel strand on GP19
 
 def burst_sample(duration:float = 1.0, samples:int = 100) -> int:
     """Takes average of analog reading over short period of time."""
@@ -44,11 +44,15 @@ while True:
     # but now scale upward to remove the divider
     volts_scaled:float = volts / 0.32
 
+    # total current
+    current_ma:float = pixels1.current + pixels2.current
+
     # display
     oled.fill(0)
     oled.text(str(val), 0, 0)
     oled.text(str(round(volts, 2)) + "v ADC", 0, 12)
     oled.text(str(round(volts_scaled, 2)) + "v", 0, 24)
+    oled.text(str(int(current_ma)) + " mA")
     oled.show()
 
     time.sleep(0.5)
