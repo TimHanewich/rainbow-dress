@@ -78,8 +78,8 @@ In these all of these tests, the actual voltage of the battery pack was >= 7.76v
 |Scenario|ADC Reading|Read Voltage|Pack Voltage|
 |-|-|-|-|
 |0 neopixels|48670|2.4|7.49|
-|5 neopixels|48450|2.39|7.45|
-|16 neopixels|48200|2.37|7.41|
+|5 neopixels @ 255,255,255|48450|2.39|7.45|
+|16 neopixels @ 255,255,255|48200|2.37|7.41|
 
 ## Estimating Total Current Consumption
 From waist to ground is about 38 inches.
