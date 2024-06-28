@@ -71,11 +71,11 @@ In the above table, you may wonder why measuring the color (0, 0, 0), no color a
 ### Digitally Estimating Current Consumption While Powering Neopixels
 So I'm trying to determine if there is a way to digitally (within the Raspberry Pi Pico's calculations) estimate how much current all of the neopixels are consuming based upon what colors the Raspberry Pi is instructing them to be. Why would this be important? If we can calculate this, maybe we could back this out to determine the voltage sag and get a feel for what the real voltage is.
 
-![luminary values](https://i.imgur.com/wEEO8kz.png)
+![luminary values](https://i.imgur.com/eNnyeB5.png)
 
 In the example above, you'll see I did some math. For each of the colors in the table of consumption in the section above, I added up the R, G, and B values. The consumption for all three is roughly similar (only B seems to under-consume a bit), so we can add them together. I called this new unit "Luminary Values". 
 
-After adding these all up, I then summed up the *entirety* of every tests. And then did the same for the amps per pixel on each test. Then, I divided those two to get a rough estimate for how many amps each luminary value takes. The answer is ` 0.000047619047619` amps. I should probably express that in mA. But whatever.
+After adding these all up, I then summed up the *entirety* of every tests. And then did the same for the amps per pixel on each test. Then, I divided those two to get a rough estimate for how many amps each luminary value takes. The answer is `0.000045851370851` amps. I should probably express that in mA. But whatever.
 
 Knowing that, I can now estimate the amperage consumption of a single neopixel based upon the sum of the R,G,B value it is displaying. You can see these estimates in the "Estimated" blue column.
 
