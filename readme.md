@@ -71,13 +71,15 @@ In the above table, you may wonder why measuring the color (0, 0, 0), no color a
 ## Voltage Sag?
 I performed tests of recording the voltage of the battery pack via the ADC channel in three configurations: no neopixels attached (the only thing consuming from the battery was the buck converter and Pi), a single strand of 5 neopixels attached, and then both strands of 5 neopixels and 11 neopixels attached (totaling 16 neopixels).
 
-In both scenarios of neopixels being attached, every neopixel was on its max brightness, 255,255,255.
+In both scenarios of neopixels being attached, every neopixel was on its max brightness, 255,255,255. 
+
+In these all of these tests, the actual voltage of the battery pack was >= 7.76v (what I measured at the end of all of the tests). So, the voltage is being underestimated even with little to no load (other than the Raspberry Pi and buck converter), and the underestimation continues even further when under load of neopixels.
 
 |Scenario|ADC Reading|Read Voltage|Pack Voltage|
 |-|-|-|-|
-|0 neopixels|48670|
-|5 neopixels|48450|
-|16 neopixels|48200|
+|0 neopixels|48670|2.4|7.49|
+|5 neopixels|48450|2.39|7.45|
+|16 neopixels|48200|2.37|7.41|
 
 ## Estimating Total Current Consumption
 From waist to ground is about 38 inches.
