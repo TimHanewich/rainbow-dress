@@ -75,7 +75,7 @@ In both scenarios of neopixels being attached, every neopixel was on its max bri
 
 In these all of these tests, the actual voltage of the battery pack was >= 7.76v (what I measured at the end of all of the tests). So, the voltage is being underestimated even with little to no load (other than the Raspberry Pi and buck converter), and the underestimation continues even further when under load of neopixels.
 
-|Scenario|ADC Reading|Read Voltage|Pack Voltage|
+|Scenario|ADC Reading|Read Voltage|Scaled Pack Voltage|
 |-|-|-|-|
 |0 neopixels|48670|2.4|7.49|
 |5 neopixels @ 255,255,255|48450|2.39|7.45|
