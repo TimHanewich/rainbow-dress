@@ -75,9 +75,9 @@ In both scenarios of neopixels being attached, every neopixel was on its max bri
 
 |Scenario|ADC Reading|Read Voltage|Pack Voltage|
 |-|-|-|-|
-|0 neopixels|48400|||
-|5 neopixels|48450|||
-|16 neopixels|48350|||
+|0 neopixels|48670|
+|5 neopixels|48450|
+|16 neopixels|48200|
 
 ## Estimating Total Current Consumption
 From waist to ground is about 38 inches.
