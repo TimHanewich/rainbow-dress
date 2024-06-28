@@ -24,13 +24,24 @@ def burst_sample(duration:float = 1.0, samples:int = 100) -> int:
         time.sleep(delay)
     return int(round(total / samples, 0))
 
+flip_every_ms:int = 15000
+last_flipped_ticks_ms:int = time.ticks_ms()
+leds_on:bool = False
 while True:
 
     # turn on the pixels (we put this in the while loop because I may be taking them attaching them on and off to experiemtn with voltage, so keep showing!)
-    pixels1.fill((255, 255, 255))
-    pixels2.fill((255, 255, 255))
-    pixels1.show()
-    pixels2.show()
+    if (time.ticks_ms() - last_flipped_ticks_ms) > flip_every_ms:
+        if leds_on == False:
+            pixels1.fill((255, 255, 255))
+            pixels2.fill((255, 255, 255))
+            leds_on = True
+        else:
+            pixels1.fill((0, 0, 0))
+            pixels2.fill((0, 0, 0))
+            leds_on = False
+        pixels1.show()
+        pixels2.show()
+        last_flipped_ticks_ms = time.ticks_ms()
     
     # sample
     val:int = burst_sample()
