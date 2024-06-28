@@ -42,7 +42,7 @@ You can find the basic code for the tests performed on commit `e55a535374d0f84eb
 
 Current Consumption of Raspberry Pi Pico on its own: 0.022 amps
 
-With a single strand of 12 WS2812b Neopixels hooked up, going through several color patterns:
+With a single strand of 12 WS2812b Neopixels hooked up, going through several color patterns (each pixel the same color!):
 |Color|Amps (including Pi)|W/O Pi|Amps Per Pixel|
 |-|-|-|-|
 |255,255,255|0.477|0.455|0.038|
