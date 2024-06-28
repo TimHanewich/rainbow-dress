@@ -68,6 +68,17 @@ Columns in the above table explained:
 
 In the above table, you may wonder why measuring the color (0, 0, 0), no color at all, is important. That is because these neopixels have an *idle current draw*. Even while not showing a color, they still consume a small amount of power, on a per-pixel basis.
 
+## Voltage Sag?
+I performed tests of recording the voltage of the battery pack via the ADC channel in three configurations: no neopixels attached (the only thing consuming from the battery was the buck converter and Pi), a single strand of 5 neopixels attached, and then both strands of 5 neopixels and 11 neopixels attached (totaling 16 neopixels).
+
+In both scenarios of neopixels being attached, every neopixel was on its max brightness, 255,255,255.
+
+|Scenario|ADC Reading|Read Voltage|Pack Voltage|
+|-|-|-|-|
+|0 neopixels|48400|||
+|5 neopixels|48450|||
+|16 neopixels|48350|||
+
 ## Estimating Total Current Consumption
 From waist to ground is about 38 inches.
 
