@@ -38,7 +38,7 @@ Since we know the voltage divider brought the voltage down to 32%, we can just d
 ## Estimating Per-Pixel Current Consumption of Neopixels
 All measurements were @ 5V supply.
 
-You can find the basic code for the tests performed on commit `af26f8e290e95348adb6b4bacacfa5113da6ce71` of this repo in this `neopixel_test` folder.
+You can find the basic code for the tests performed on commit `e55a535374d0f84ebc838c37eb0fcb289b4c449b` of this repo in this `neopixel_test` folder.
 
 Current Consumption of Raspberry Pi Pico on its own: 0.022 amps
 
