@@ -31,11 +31,14 @@ while True:
 
     # turn on the pixels (we put this in the while loop because I may be taking them attaching them on and off to experiemtn with voltage, so keep showing!)
     if (time.ticks_ms() - last_flipped_ticks_ms) > flip_every_ms:
+        print("Time to flip!")
         if leds_on == False:
+            print("Flipped to on")
             pixels1.fill((255, 255, 255))
             pixels2.fill((255, 255, 255))
             leds_on = True
         else:
+            print("Flipped to off")
             pixels1.fill((0, 0, 0))
             pixels2.fill((0, 0, 0))
             leds_on = False
