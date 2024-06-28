@@ -99,3 +99,6 @@ I charged one up to fully charged, according to my balance charger (4.1V) and us
 The amperage extracted from the battery after ~82 minutes after fully discharging totalled 1109mAh, or 1.11 Ah.
 
 But, charging it back up to 4.1V only reads that it put back 985 mAh. Weird.
+
+## Tests I Created and Performed
+- [voltage](./tests/voltage/) on commit `534b1bc19a855027a01a37e4c7f81d3ae7e5f558` contains simple code that reads the incoming ADC and translates this to a voltage on the battery pack. Consistently lower voltage reading on the pack by 0.41 volts lower than actual. Need to adjust measurements?
