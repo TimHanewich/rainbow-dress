@@ -34,8 +34,8 @@ while True:
     # display
     oled.fill(0)
     oled.text(str(val), 0, 0)
-    oled.text(str(round(volts, 2)), 0, 12)
-    oled.text(str(round(volts_scaled, 2)), 0, 24)
+    oled.text(str(round(volts, 2)) + "v ADC", 0, 12)
+    oled.text(str(round(volts_scaled, 2)) + "v", 0, 24)
     oled.show()
 
     time.sleep(0.5)
