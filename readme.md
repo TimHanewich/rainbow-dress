@@ -15,8 +15,8 @@ As you can see in the image above, a voltage divider with a 100,000 ohm resistor
 
 |Situation|Battery Pack Voltage|Divided Voltage (32%)|ADC Reading|
 |-|-|-|-|
-|Two fully charged 18650s in series|8.4|2.69|54700|
-|Two fully depleted 18650s in series|6.0|1.92|39150|
+|Two fully charged 18650s in series|8.2|2.62|53100|
+|Two fully depleted 18650s in series|6.2|1.98|40400|
 
 After observing the readings above, we can say the proportion is a difference in 20,195 ADC reading is a 1.0V difference in the reading. 
 
