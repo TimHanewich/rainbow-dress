@@ -12,7 +12,7 @@ print(i2c.scan())
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 # set up neopixel
-pixels1 = neopixel.Neopixel(5, 0, 22, "GRB") # 5 pixel strand on GP22
+pixels1 = neopixel.Neopixel(1, 0, 22, "GRB") # 11 pixel strand on GP22
 pixels2 = neopixel.Neopixel(11, 1, 19, "GRB") # 11 pixel strand on GP19
 
 def burst_sample(duration:float = 1.0, samples:int = 100) -> int:
