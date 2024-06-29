@@ -50,8 +50,8 @@ while True:
     val:int = burst_sample()
 
     # based on the sample reading, try to calculate volts
-    full:tuple[int, float] = (53100, 2.62)
-    dead:tuple[int, float] = (40400, 1.98)
+    full:tuple[int, float] = (50710, 2.62)
+    dead:tuple[int, float] = (38715, 1.98)
     PercentOfRange:float = (val - dead[0]) / (full[0] - dead[0])
     volts:float = dead[1] + (PercentOfRange * (full[1] - dead[1]))
 
