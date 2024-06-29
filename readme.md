@@ -13,10 +13,17 @@ This project uses a voltage divider to proportionally scale down the voltage of 
 
 As you can see in the image above, a voltage divider with a 100,000 ohm resistor on the positive terminal and a 47,000 ohm resistor on the negative terminal will cut the source voltage to only 32% of its original state. This **32%** is very important for proportionally calculating what the battery pack's voltage is, based upon the 32% the pico will be reading on its ADC pins (read on below).
 
+Recording voltage of a separate system from the system that is powering the Pico:
 |Situation|Battery Pack Voltage|Divided Voltage (32%)|ADC Reading|
 |-|-|-|-|
 |Two fully charged 18650s in series|8.2|2.62|53100|
 |Two fully depleted 18650s in series|6.2|1.98|40400|
+
+Recording voltage of a power source that is *also* powering the Pico itself:
+|Situation|Battery Pack Voltage|Divided Voltage (32%)|ADC Reading|
+|-|-|-|-|
+|Two fully charged 18650s in series|8.2|2.62|50710|
+|Two fully depleted 18650s in series|6.2|1.98|38715|
 
 After observing the readings above, we can say the proportion is a difference in 20,195 ADC reading is a 1.0V difference in the reading. 
 
