@@ -55,7 +55,39 @@ In these all of these tests, the actual voltage of the battery pack was >= 7.76v
 |5 neopixels @ 255,255,255|48450|2.39|7.45|
 |16 neopixels @ 255,255,255|48200|2.37|7.41|
 
-## Estimating Total Current Consumption
+## Observing the Correlation Between Voltage Sag and Neopixel Battery Consumption
+Using the `NeopixelManager` class from [here](https://github.com/TimHanewich/MicroPython-Collection/blob/master/NeopixelManager/neopixel.py) from commit `6aa62f56df12e6f01aa5c7ae18877555ad04907a`, I am not able to *estimate* the current consumption of the neopixel strands that are being powered, based on their number of pixels and color each pixel is showing.
+
+I set up a test to observe the correlation between voltage sag and the (estimated) current being drawn from the power source based. You can find that test [here](./tests/voltage/) on commit `37df69d80cada195c118876c04fcdca3f32cb3f1` of this repository. 
+
+The test continues to show random colors across two neopixel strands, displaying the estimated current consumption of those strands and the ADC reading from the voltage divider. The test flips back and forth between a random color and the color (0,0,0) (all off), allowing you to observe the immediate voltage sag from the power source despite there not being a change in voltage (I recorded these tests from a DC power supply so there really isn't sag I don't think). Regardless, these are the results:
+
+These are the results, at varying power source supply voltage levels:
+
+|ADC Reading at (0,0,0)|ADC Reading w/ Random Colors|NeopixelManager Estimated Current (mA)|
+|46800|44900|413|
+|46800|44550|479|
+|46800|45721|233|
+|46800|46180|148|
+|46800|44920|413|
+|46800|45350|311|
+|46800|44600|462|
+|46800|43900|608|
+|46800|44750|449|
+|46800|45634|246|
+|46800|45500|278|
+|46800|44700|458|
+|46800|46000|213|
+|46800|44300|568|
+|40555|38100|475|
+|40555|38132|472|
+|40555|39923|136|
+|40555|38850|341|
+|40555|37700|554|
+|40555|38570|394|
+|40555|37688|567|
+
+## Estimating Total Current Consumption for the Entire System
 From waist to ground is about 38 inches.
 
 We want 8 full strands from waist to ground. So, 38*8 = 304 inches of neopixels.
