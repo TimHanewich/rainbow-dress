@@ -64,7 +64,7 @@ The test continues to show random colors across two neopixel strands, displaying
 
 These are the results, at varying power source supply voltage levels. It is worth noting that technically speaking, there was minor current draw even on the (0,0,0) because of the idle voltage of the neopixels and slight current draw of the Pico and SSD-1306. However, this is marginal and I don't think matters here. The NeopixelManager was only predicting 12mA of current at (0,0,0) from the Neopixels, so it is negligible. Ignored for the sake of this exercise.
 
-|ADC Reading at (0,0,0)|ADC Reading w/ Random Color|NeopixelManager Estimated Current (mA)|
+|ADC Reading at (0,0,0)|ADC Reading w/ Random Color|NeopixelManager Estimated Current (mA) @ Random Color|
 |-|-|-|
 |46800|44900|413|
 |46800|44550|479|
