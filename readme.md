@@ -62,7 +62,7 @@ I set up a test to observe the correlation between voltage sag and the estimated
 
 The test continues to show random colors across two neopixel strands, displaying the estimated current consumption of those strands and the ADC reading from the voltage divider. The test flips back and forth between a random color and the color (0,0,0) (all off), allowing you to observe the immediate voltage sag from the power source despite there not being a change in voltage (I recorded these tests from a DC power supply so there really isn't sag I don't think). Regardless, these are the results:
 
-These are the results, at varying power source supply voltage levels. It is worth noting that technically speaking, there was minor current draw even on the (0,0,0) because of the idle voltage of the neopixels and slight current draw of the Pico and SSD-1306. However, this is marginal and I don't think matters here. The NeopixelManager was only predicting 12mA of current at (0,0,0) from the Neopixels, so it is negligible. Ignored for the sake of this exercise.
+These are the results, at varying power source supply voltage levels. It is worth noting that technically speaking, there was minor current draw even on the (0,0,0) because of the idle voltage of the neopixels and slight current draw of the Pico and SSD-1306. However, this is marginal and I don't think matters here. The NeopixelManager was only predicting 12mA of current at (0,0,0) from the Neopixels, so it is negligible. Ignored for the sake of this exercise. There were two strands of Neopixels in this experiment, both with 11 pixels.
 
 |ADC Reading at (0,0,0)|ADC Reading w/ Random Color|NeopixelManager Estimated Current (mA) @ Random Color|
 |-|-|-|
