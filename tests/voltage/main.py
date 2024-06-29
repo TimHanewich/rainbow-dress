@@ -50,21 +50,27 @@ while True:
         pixels1.show()
         pixels2.show()
         last_flipped_ticks_ms = time.ticks_ms()
+
+    # estimate the total current being drawn from the neopixels using the NeopixelManagers!
+    current_ma:float = pixels1.current + pixels2.current
     
-    # sample
+    # sample the raw ADC reading of the battery
     val:int = burst_sample()
 
+    # "add back" ADC points to accomodate for the voltage sag due to the current consumption of the neopixels!
+    adc_drop_per_ma:float = 4.7040504848760 # determined this through observations (see readme!)
+    val = val + int(adc_drop_per_ma * current_ma) # add back!
+
     # based on the sample reading, try to calculate volts
-    full:tuple[int, float] = (50710, 2.62)
-    dead:tuple[int, float] = (38715, 1.98)
+    full:tuple[int, float] = (50710, 2.62) # full, when on same power source
+    dead:tuple[int, float] = (38715, 1.98) # depleted, when on same power source
     PercentOfRange:float = (val - dead[0]) / (full[0] - dead[0])
     volts:float = dead[1] + (PercentOfRange * (full[1] - dead[1]))
 
     # but now scale upward to remove the divider
     volts_scaled:float = volts / 0.32
 
-    # total current
-    current_ma:float = pixels1.current + pixels2.current
+    
 
     # display
     oled.fill(0)
