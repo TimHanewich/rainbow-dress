@@ -56,15 +56,16 @@ In these all of these tests, the actual voltage of the battery pack was >= 7.76v
 |16 neopixels @ 255,255,255|48200|2.37|7.41|
 
 ## Observing the Correlation Between Voltage Sag and Neopixel Battery Consumption
-Using the `NeopixelManager` class from [here](https://github.com/TimHanewich/MicroPython-Collection/blob/master/NeopixelManager/neopixel.py) from commit `6aa62f56df12e6f01aa5c7ae18877555ad04907a`, I am not able to *estimate* the current consumption of the neopixel strands that are being powered, based on their number of pixels and color each pixel is showing.
+Using the `NeopixelManager` class from [here](https://github.com/TimHanewich/MicroPython-Collection/blob/master/NeopixelManager/neopixel.py) from commit `6aa62f56df12e6f01aa5c7ae18877555ad04907a`, I am now able to estimate the current consumption of the neopixel strands that are being powered, based on their number of pixels and color each pixel is showing.
 
-I set up a test to observe the correlation between voltage sag and the (estimated) current being drawn from the power source based. You can find that test [here](./tests/voltage/) on commit `37df69d80cada195c118876c04fcdca3f32cb3f1` of this repository. 
+I set up a test to observe the correlation between voltage sag and the estimated current being drawn from the power source based. You can find that test [here](./tests/voltage/) on commit `37df69d80cada195c118876c04fcdca3f32cb3f1` of this repository. 
 
 The test continues to show random colors across two neopixel strands, displaying the estimated current consumption of those strands and the ADC reading from the voltage divider. The test flips back and forth between a random color and the color (0,0,0) (all off), allowing you to observe the immediate voltage sag from the power source despite there not being a change in voltage (I recorded these tests from a DC power supply so there really isn't sag I don't think). Regardless, these are the results:
 
 These are the results, at varying power source supply voltage levels:
 
-|ADC Reading at (0,0,0)|ADC Reading w/ Random Colors|NeopixelManager Estimated Current (mA)|
+|ADC Reading at (0,0,0)|ADC Reading w/ Random Color|NeopixelManager Estimated Current (mA)|
+|-|-|-|
 |46800|44900|413|
 |46800|44550|479|
 |46800|45721|233|
