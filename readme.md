@@ -88,6 +88,12 @@ These are the results, at varying power source supply voltage levels:
 |40555|38570|394|
 |40555|37688|567|
 
+Using the readings above, it is actually not hard at all to find a correlation, and a very linear and predictable one at that...
+
+On average, for every mA of current draw out of the neopixels, we can expect the ADC reading to be lowered (due to voltage sag?) by **4.7040504848760** points.
+
+So how can we accomodate for this voltage sag when estimating the voltage of the battery? For every estimated mA of current draw by the `NeopixelManager`, add **4.7040504848760** back on top *before* using the read ADC to calculate the actual voltage on that pin and then the scaled voltage of the full pack.
+
 ## Estimating Total Current Consumption for the Entire System
 From waist to ground is about 38 inches.
 
