@@ -88,6 +88,8 @@ These are the results, at varying power source supply voltage levels:
 |40555|38570|394|
 |40555|37688|567|
 
+In the readings above, please keep in mind that the mA consumption estimate was an estimate from the NeopixelManager class from [here](https://github.com/TimHanewich/MicroPython-Collection/blob/master/NeopixelManager/neopixel.py) from commit `6aa62f56df12e6f01aa5c7ae18877555ad04907a`. The commit is very important because if the algorithm that estimates current consumption changes, any subsequent calculations of voltage, accomodating for voltage sag, will be thrown off. If that algorithm changes and it is put into place in this repository, you will likely need to perform these tests again and calculate the figures below again, updating your adjustment for voltage sag due to battery load.
+
 Using the readings above, it is actually not hard at all to find a correlation, and a very linear and predictable one at that...
 
 On average, for every mA of current draw out of the neopixels, we can expect the ADC reading to be lowered (due to voltage sag?) by **4.7040504848760** points.
