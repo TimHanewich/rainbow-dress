@@ -13,6 +13,9 @@ This project uses a voltage divider to proportionally scale down the voltage of 
 
 As you can see in the image above, a voltage divider with a 100,000 ohm resistor on the positive terminal and a 47,000 ohm resistor on the negative terminal will cut the source voltage to only 32% of its original state. This **32%** is very important for proportionally calculating what the battery pack's voltage is, based upon the 32% the pico will be reading on its ADC pins (read on below).
 
+[This](https://github.com/TimHanewich/rainbow-dress/releases/download/1/dress.perfboard.pptx) is the schematic for this voltage divider, on a perfboard:
+![voltage divider](https://i.imgur.com/JdEJjKi.png)
+
 Recording voltage of a separate system from the system that is powering the Pico:
 |Situation|Battery Pack Voltage|Divided Voltage (32%)|ADC Reading|
 |-|-|-|-|
